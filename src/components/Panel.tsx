@@ -8,10 +8,21 @@ function Panel({ children }: { children: React.ReactNode }) {
     );
 }
 
-function Row({ children }: { children: React.ReactNode }) {
+function Row({ children, label }: { children: React.ReactNode, label?: string }) {
     return (
         <div className={styles.row}>
-            {children}
+            {label &&
+                <div className={styles.rowLabel}>
+                    <div className={styles.rowLabelLine} />
+                    <div className={styles.rowLabelText}>
+                        {label}
+                    </div>
+                    <div className={styles.rowLabelLine} />
+                </div>
+            }
+            <div className={styles.rowItems}>
+                {children}
+            </div>
         </div>
     );
 }

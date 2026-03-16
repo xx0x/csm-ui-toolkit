@@ -6,7 +6,7 @@ function Screwed({ children, wiggly }: { children: React.ReactNode, wiggly?: boo
     const [randomAngles] = useState(() => {
         const a = [0, 0, 0, 0];
         for (let i = 0; i < a.length; i++) {
-            a[i] = Math.random() * 20 - 10;
+            a[i] = Math.random() * 40 - 20;
         }
         return a;
     });

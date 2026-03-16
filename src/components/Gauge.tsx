@@ -1,17 +1,57 @@
 import styles from './Gauge.module.scss';
+import React from 'react';
 
-function Gauge({ label, percentage }: { label: React.ReactNode, percentage: number }) {
+function Gauge({ label,
+    percentage,
+    sections,
+    subsections = 4,
+    sectionLabels
+}: { label: React.ReactNode, percentage: number, sections?: number, subsections?: number, sectionLabels?: string[] }) {
 
-    const startAngle = -135;
-    const endAngle = 135;
-    const angle = startAngle + (endAngle - startAngle) * (percentage / 100);
+    const startAngle = -120;
+    const endAngle = 120;
+    const sectionAngle = (sections && sections > 0) ? ((endAngle - startAngle) / ((sections - 1))) : 0;
+    const subsectionAngle = (sections && sections > 0 && subsections && subsections > 0) ? (sectionAngle / (subsections + 1)) : 0;
+
+    const handAngle = startAngle + (endAngle - startAngle) * (percentage / 100);
 
     return (
         <div className={styles.container}>
             <div className={styles.inside}>
+                {sections && Array.from({ length: sections }, (_, i) => {
+                    const currentSectionAngle = startAngle + sectionAngle * i;
+                    return (
+                        <React.Fragment key={i}>
+                            <div
+                                className={styles.section}
+                                style={{ transform: `rotate(${currentSectionAngle}deg)` }}
+                            >
+                                {sectionLabels && sectionLabels[i] && (
+                                    <div
+                                        className={styles.sectionLabel}
+                                        style={{ transform: `rotate(${-currentSectionAngle}deg)` }}
+                                    >
+                                        {sectionLabels[i]}
+                                    </div>
+                                )}
+                            </div>
+                            {i < (sections - 1) && subsections && Array.from({ length: subsections }, (_, j) => {
+                                const currentSubsectionAngle = currentSectionAngle + subsectionAngle * (j + 1);
+                                return (
+                                    <div
+                                        key={`${i}-${j}`}
+                                        className={styles.subsection}
+                                        style={{ transform: `rotate(${currentSubsectionAngle}deg)` }}
+                                    />
+                                );
+                            })}
+                        </React.Fragment>
+                    );
+                })}
+
                 <div
                     className={styles.center}
-                    style={{ transform: `rotate(${angle}deg)` }}
+                    style={{ transform: `rotate(${handAngle}deg)` }}
                 >
                     <svg
                         className={styles.hand}
@@ -19,7 +59,6 @@ function Gauge({ label, percentage }: { label: React.ReactNode, percentage: numb
                 </div>
                 <div className={styles.label}>
                     {label}
-                    <div>{percentage}%</div>
                 </div>
             </div>
         </div>
