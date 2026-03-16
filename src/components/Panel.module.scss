@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 3em;
+    gap: 3em;
+}
+
+.row {
+    display: flex;
+    gap: 4em;
+    flex-direction: row;
+    align-items: center;
+}

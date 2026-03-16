@@ -1,0 +1,58 @@
+.container {
+    position: relative;
+    display: inline-flex;
+
+}
+
+.screw {
+    position: absolute;
+    width: 1.3em;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: #666;
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.2),
+        inset 0px -1px 2px 0px rgba(0, 0, 0, 0.9),
+        inset 0px 1px 2px 0px rgba(255, 255, 255, 0.75);
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60%;
+        height: 13%;
+        border-radius: 2px;
+        background-color: #212121;
+        transform: translate(-50%, -50%) rotate(45deg);
+        box-shadow: inset 0px -1px 2px 0px rgba(255, 255, 255, 0.1);
+    }
+
+    &::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+
+    &:nth-child(1) {
+        top: 0;
+        left: 0;
+    }
+
+    &:nth-child(2) {
+        top: 0;
+        right: 0;
+    }
+
+    &:nth-child(3) {
+        bottom: 0;
+        left: 0;
+    }
+
+
+    &:nth-child(4) {
+        bottom: 0;
+        right: 0;
+
+    }
+
+}
