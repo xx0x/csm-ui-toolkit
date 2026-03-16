@@ -15,13 +15,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0.85;
 }
 
 .rowLabelLine {
     display: block;
     flex: 1;
     height: 3px;
-    background-color: #eee;
+    background-color: currentColor;
     position: relative;
 
     &::before {
@@ -30,7 +31,7 @@
         top: 0;
         height: 1em;
         width: 3px;
-        background-color: #eee;
+        background-color: currentColor;
     }
 
     &:first-child::before {
